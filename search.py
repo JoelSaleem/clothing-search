@@ -8,13 +8,6 @@ from util import (
     parse_str_to_tokens, get_target_str
 )
 
-# TODO: refactor out
-console = Console()
-table = Table(show_header=True, header_style="bold magenta")
-table.add_column("Score", width=12)
-table.add_column("id", style="dim")
-table.add_column("name", style="dim")
-table.add_column("brand", style="dim")
 
 if __name__ == "__main__":
     query, dataset = parse_args()
@@ -34,12 +27,4 @@ if __name__ == "__main__":
         results.add_item({'score': score, 'item': item})
 
     results.sort(key=lambda r: r['score'], reverse=True)
-    for r in results:
-        table.add_row(
-            str(r['score']),
-            str(r['item']['id']),
-            r['item']['name'],
-            r['item']['brand']
-
-        )
-    console.log(table)
+    results.print()

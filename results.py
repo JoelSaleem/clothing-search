@@ -1,4 +1,5 @@
 from functools import cmp_to_key
+from tables.results_table import ResultsTable
 
 
 def score_comparer(a, b):
@@ -15,6 +16,7 @@ class Results(list):
     def __init__(self, max_size):
         self.lowest_score = float('inf')
         self.max_size = max_size
+        self.table = ResultsTable()
 
     def assign_lowest_score(self):
         if len(self) == 0:
@@ -54,3 +56,9 @@ class Results(list):
             data_to_print.append((score, item))
 
         return '\n'.join('\t'.join(item_details) for item_details in data_to_print)
+
+    def print(self):
+        self.table  \
+            .populate_cols() \
+            .populate_rows(self) \
+            .print()
